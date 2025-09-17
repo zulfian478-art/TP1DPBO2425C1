@@ -15,8 +15,35 @@ kecurangan seperti yang telah dispesifikasikan. Aamiin.
 
 # PENJELASAN DESAIN
 
+Disini saya membuat file barang yang berisi id dari barang itu, lalu nama barangnya, harga barangnya, merek harganya, kualitas barangnya serta foto barangnya 
+apabila di butuhkan, nah makadari itu di kode ini berisi tentang cara kira untuk menambahkan barang, lalu juga ada untuk melihat barang yang ada, lalu juga ada
+suatu fitur untuk memperbarui status suatu barang, ada juga fitur untung menghapus barang itu juga, serta juga ada fitur untuk mencari barnag tersebut menggunakan id nya.
 
+Lalu di sini ada 4 kode program yang sudah di jalankan dan sudah ada foto hasilnya, nah bahasa bahasa yang di gunakan itu adalah C++, Java, Php, dan juga Python.
 
+Fitur yang akan muncul saat kode di jalankan itu akan muncul seperti ini:
+
+1. Tambah data.
+2. Tampilkan data.
+3. Update data.
+4. Hapus data.
+5. Cari data.
+6. Exit.
+
+kita bahas 1 per satu:
+1. Tambah data.
+Fitur ini di gunakan oleh kita untuk menambahkan data baru ke dalam data suatu barang yang akan kita gunakan.
+2. Tampilkan data.
+Fitur ini di gunakan oleh kita untuk menampilkan data yang telah ad ataupun data yang telah kita ubah.
+3. Update data.
+Fitur ini berfungsi untuk mengubah sesuatu data yang ada dalam data kita misalnya ada kesalahan nama atau harga dan lain lain.
+4. Hapus Data.
+Fitur hapus data ini di gunakan oleh kita apabila ada data yang sekiranya ingin kita hapus ataupun tuidak ingin kita gunakan lagi.
+5. Cari data.
+Fitur cari data ini di gunakan oleh kira untuk mencari suatu data yang ada dalam kumpulan data kita, kita bisa dengan mudah mencarinya
+dengan menggunakan idnya saja agar data yang sekiiranya ada jauh di bawah atau tenggelam bisa di cari dengan cepat.
+6. Exit.
+   Fitur Exit ini di gunakan apabila kita sudah selesai dengan semua yang ingin kita lakukan.
 # DOKUMENTASI
 
 # CPP
