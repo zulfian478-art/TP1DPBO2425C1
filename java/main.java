@@ -2,11 +2,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        // Array untuk menampung objek Barang (maks 100 data)
         Barang[] daftarBarang = new Barang[100]; // array of object
-        int jumlah = 0;
-        int pilihan;
+        int jumlah = 0;  // counter jumlah data yang tersimpan
+        int pilihan;     // menyimpan input pilihan menu
         Scanner sc = new Scanner(System.in);
 
+        // Loop utama menu
         do {
             System.out.println("\n=== MENU TOKO ELEKTRONIK ===");
             System.out.println("1. Tambah Data");
@@ -17,10 +19,12 @@ public class Main {
             System.out.println("6. Keluar");
             System.out.print("Pilih menu: ");
             pilihan = sc.nextInt();
-            sc.nextLine(); // buang newline
+            sc.nextLine(); // buang newline biar tidak nyangkut di nextLine
 
             if (pilihan == 1) {
-                // Tambah Data
+                // =========================
+                // Tambah Data (Create)
+                // =========================
                 System.out.print("Masukkan ID        : ");
                 int id = sc.nextInt();
                 sc.nextLine();
@@ -38,18 +42,22 @@ public class Main {
                 System.out.println("✅ Data berhasil ditambahkan!");
 
             } else if (pilihan == 2) {
-                // Tampilkan Data
+                // =========================
+                // Tampilkan Data (Read)
+                // =========================
                 System.out.println("\n=== DAFTAR BARANG ===");
                 if (jumlah == 0) {
                     System.out.println("Belum ada data.");
                 } else {
                     for (int i = 0; i < jumlah; i++) {
-                        daftarBarang[i].tampilkan();
+                        daftarBarang[i].tampilkan(); // panggil method tampilkan dari class Barang
                     }
                 }
 
             } else if (pilihan == 3) {
+                // =========================
                 // Update Data
+                // =========================
                 System.out.print("Masukkan ID barang yang akan diupdate: ");
                 int id = sc.nextInt();
                 sc.nextLine();
@@ -57,6 +65,7 @@ public class Main {
 
                 for (int i = 0; i < jumlah; i++) {
                     if (daftarBarang[i].getId() == id) {
+                        // Jika ditemukan → minta input baru
                         System.out.print("Masukkan Nama baru     : ");
                         String nama = sc.nextLine();
                         System.out.print("Masukkan Harga baru    : ");
@@ -66,6 +75,7 @@ public class Main {
                         System.out.print("Masukkan Kualitas baru : ");
                         String kualitas = sc.nextLine();
 
+                        // Set data baru
                         daftarBarang[i].setNama(nama);
                         daftarBarang[i].setHarga(harga);
                         daftarBarang[i].setMerk(merk);
@@ -79,7 +89,9 @@ public class Main {
                 if (!found) System.out.println("❌ Data dengan ID tersebut tidak ditemukan.");
 
             } else if (pilihan == 4) {
-                // Hapus Data
+                // =========================
+                // Hapus Data (Delete)
+                // =========================
                 System.out.print("Masukkan ID barang yang akan dihapus: ");
                 int id = sc.nextInt();
                 sc.nextLine();
@@ -87,10 +99,11 @@ public class Main {
 
                 for (int i = 0; i < jumlah; i++) {
                     if (daftarBarang[i].getId() == id) {
+                        // Geser elemen setelah index i ke kiri
                         for (int j = i; j < jumlah - 1; j++) {
                             daftarBarang[j] = daftarBarang[j + 1];
                         }
-                        jumlah--;
+                        jumlah--; // kurangi total data
                         System.out.println("✅ Data berhasil dihapus!");
                         found = true;
                         break;
@@ -99,7 +112,9 @@ public class Main {
                 if (!found) System.out.println("❌ Data dengan ID tersebut tidak ditemukan.");
 
             } else if (pilihan == 5) {
-                // Cari Data
+                // =========================
+                // Cari Data (Search by ID)
+                // =========================
                 System.out.print("Masukkan ID barang yang dicari: ");
                 int id = sc.nextInt();
                 sc.nextLine();
@@ -116,7 +131,7 @@ public class Main {
                 if (!found) System.out.println("❌ Data dengan ID tersebut tidak ditemukan.");
             }
 
-        } while (pilihan != 6);
+        } while (pilihan != 6); // keluar jika input = 6
 
         System.out.println("Program selesai. Terima kasih!");
         sc.close();

@@ -1,11 +1,12 @@
-#include "barang.cpp"
+#include "barang.cpp"  // include file class barang
 
 int main() {
-    barang daftarBarang[100]; // array of object
+    barang daftarBarang[100]; // array of object untuk menampung maksimal 100 barang
     int jumlah = 0;           // banyak data yang tersimpan
-    int pilihan;
+    int pilihan;              // untuk menu
 
     do {
+        // Menu utama
         cout << "\n=== MENU TOKO ELEKTRONIK ===\n";
         cout << "1. Tambah Data\n";
         cout << "2. Tampilkan Data\n";
@@ -17,13 +18,15 @@ int main() {
         cin >> pilihan;
 
         if (pilihan == 1) {
+            // ============================
             // Tambah Data
+            // ============================
             int id;
             string nama, harga, merk, kualitas;
 
             cout << "\nMasukkan ID        : ";
             cin >> id;
-            cin.ignore();
+            cin.ignore(); // buang newline
             cout << "Masukkan Nama      : ";
             getline(cin, nama);
             cout << "Masukkan Harga     : ";
@@ -33,23 +36,28 @@ int main() {
             cout << "Masukkan Kualitas  : ";
             getline(cin, kualitas);
 
+            // buat objek baru dan simpan di array
             daftarBarang[jumlah] = barang(id, nama, harga, merk, kualitas);
             jumlah++;
             cout << "✅ Data berhasil ditambahkan!\n";
 
         } else if (pilihan == 2) {
-            // Tampilkan Data
+            // ============================
+            // Tampilkan Semua Data
+            // ============================
             cout << "\n=== DAFTAR BARANG ===\n";
             if (jumlah == 0) {
                 cout << "Belum ada data.\n";
             } else {
                 for (int i = 0; i < jumlah; i++) {
-                    daftarBarang[i].tampilkan();
+                    daftarBarang[i].tampilkan(); // panggil method tampilkan
                 }
             }
 
         } else if (pilihan == 3) {
+            // ============================
             // Update Data
+            // ============================
             int id;
             cout << "\nMasukkan ID barang yang akan diupdate: ";
             cin >> id;
@@ -58,6 +66,7 @@ int main() {
 
             for (int i = 0; i < jumlah; i++) {
                 if (daftarBarang[i].getId() == id) {
+                    // jika id ditemukan, update field
                     string nama, harga, merk, kualitas;
                     cout << "Masukkan Nama baru     : ";
                     getline(cin, nama);
@@ -81,7 +90,9 @@ int main() {
             if (!found) cout << "❌ Data dengan ID tersebut tidak ditemukan.\n";
 
         } else if (pilihan == 4) {
+            // ============================
             // Hapus Data
+            // ============================
             int id;
             cout << "\nMasukkan ID barang yang akan dihapus: ";
             cin >> id;
@@ -89,7 +100,7 @@ int main() {
 
             for (int i = 0; i < jumlah; i++) {
                 if (daftarBarang[i].getId() == id) {
-                    // geser semua data setelah i ke kiri
+                    // geser semua data setelah index i ke kiri
                     for (int j = i; j < jumlah - 1; j++) {
                         daftarBarang[j] = daftarBarang[j + 1];
                     }
@@ -102,7 +113,9 @@ int main() {
             if (!found) cout << "❌ Data dengan ID tersebut tidak ditemukan.\n";
 
         } else if (pilihan == 5) {
-            // Cari Data
+            // ============================
+            // Cari Data berdasarkan ID
+            // ============================
             int id;
             cout << "\nMasukkan ID barang yang dicari: ";
             cin >> id;
@@ -119,7 +132,7 @@ int main() {
             if (!found) cout << "❌ Data dengan ID tersebut tidak ditemukan.\n";
         }
 
-    } while (pilihan != 6);
+    } while (pilihan != 6); // keluar jika pilihan == 6
 
     cout << "\nProgram selesai. Terima kasih!\n";
     return 0;

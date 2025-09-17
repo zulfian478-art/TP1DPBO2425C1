@@ -5,19 +5,20 @@ using namespace std;
 
 class barang {
     private:
-        int id;
-        string nama;
-        string harga;
-        string merk;
-        string kualitas;
+        int id;             // ID barang (unik)
+        string nama;        // Nama barang
+        string harga;       // Harga barang (disimpan sebagai string biar fleksibel)
+        string merk;        // Merk barang
+        string kualitas;    // Kualitas barang (misalnya "Bagus", "Standar", dll)
 
     public:
-        //konstuktor kosong
+        // Konstruktor kosong
         barang()
         {
-            id = -1; //default id invalid
+            id = -1; // default id invalid (menandakan barang belum terisi data)
         }
 
+        // Konstruktor dengan parameter
         barang(int id, string nama, string harga, string merk, string kualitas) {
             this->id = id;
             this->nama = nama;
@@ -26,59 +27,57 @@ class barang {
             this->kualitas = kualitas;
         }
 
+        // Setter & Getter untuk ID
         void setId(int id)
-        {
-            this->id = id;
+         {
+             this->id = id;
+        }
+        int getId() 
+        { 
+            return this->id; 
         }
 
-        int getId()
-        {
-            return this->id;
+        // Setter & Getter untuk Nama
+        void setNama(string nama) 
+        { 
+            this->nama = nama; 
+        }
+        string getNama() 
+        { 
+            return this->nama; 
         }
 
-        void setNama(string nama)
-        {
-            this->nama = nama;
+        // Setter & Getter untuk Harga
+        void setHarga(string harga) 
+        { 
+            this->harga = harga; 
+        }
+        string getHarga() 
+        { 
+            return this->harga; 
         }
 
-        string getNama()
-        {
-            return this->nama;
+        // Setter & Getter untuk Merk
+        void setMerk(string merk) 
+        { 
+            this->merk = merk; 
+        }
+        string getMerk() 
+        { 
+            return this->merk; 
         }
 
-        void setHarga(string harga)
-        {
-            this->harga = harga;
+        // Setter & Getter untuk Kualitas
+        void setkualitas(string kualitas) 
+        { 
+            this->kualitas = kualitas; 
+        }
+        string getkualitas() 
+        { 
+            return this->kualitas; 
         }
 
-        string getHarga()
-        {
-            return this->harga;
-        }
-
-        void setMerk(string merk)
-        {
-            this->merk = merk;
-        }
-
-        string getMerk()
-        {
-            return this->merk;
-        }
-
-        void setkualitas(string kualitas)
-        {
-            this->kualitas = kualitas;
-        }
-
-        string getkualitas()
-        {
-            return this->kualitas;
-        }
-
-        
-
-        // Fungsi tampilkan
+        // Fungsi untuk menampilkan data barang
         void tampilkan() {
             cout << "ID       : " << id << endl;
             cout << "Nama     : " << nama << endl;
@@ -88,9 +87,6 @@ class barang {
             cout << "--------------------------" << endl;
         }
 
-        ~barang()
-        {
-
-        }
-
+        // Destructor (kosong, tidak ada alokasi dinamis)
+        ~barang() {}
 };

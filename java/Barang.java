@@ -1,16 +1,28 @@
+// =============================
+// Class Barang (Java)
+// merepresentasikan sebuah barang elektronik
+// dengan atribut: id, nama, harga, merk, kualitas
+// =============================
 public class Barang {
+    // Properti private → hanya bisa diakses lewat getter & setter
     private int id;
     private String nama;
     private String harga;
     private String merk;
     private String kualitas;
 
-    // Konstruktor kosong
+    // =============================
+    // Konstruktor kosong (default)
+    // id di-set -1 agar menandakan belum valid
+    // =============================
     public Barang() {
         this.id = -1; // default invalid
     }
 
+    // =============================
     // Konstruktor dengan parameter
+    // untuk inisialisasi langsung semua atribut
+    // =============================
     public Barang(int id, String nama, String harga, String merk, String kualitas) {
         this.id = id;
         this.nama = nama;
@@ -19,7 +31,10 @@ public class Barang {
         this.kualitas = kualitas;
     }
 
+    // =============================
     // Setter & Getter
+    // digunakan untuk mengubah & membaca properti private
+    // =============================
     public void setId(int id) { this.id = id; }
     public int getId() { return id; }
 
@@ -35,7 +50,10 @@ public class Barang {
     public void setKualitas(String kualitas) { this.kualitas = kualitas; }
     public String getKualitas() { return kualitas; }
 
-    // Fungsi tampilkan
+    // =============================
+    // Method tampilkan()
+    // menampilkan detail barang ke console
+    // =============================
     public void tampilkan() {
         System.out.println("ID       : " + id);
         System.out.println("Nama     : " + nama);

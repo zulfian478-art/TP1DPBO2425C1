@@ -1,19 +1,21 @@
 <?php
 include "barang.php";   // pastikan class Barang sudah ada sebelum session_start
-session_start();
+session_start();        // mulai session, agar bisa simpan objek Barang ke $_SESSION
 
-// Inisialisasi array session
+// Inisialisasi array session jika belum ada
 if (!isset($_SESSION['daftarBarang'])) {
     $_SESSION['daftarBarang'] = [];
 }
 
 // Ambil daftar file gambar dari folder images/
 $files = [];
-if (is_dir("images")) {
-    $files = array_diff(scandir("images"), ['.', '..']);
+if (is_dir("images")) { // cek apakah folder images ada
+    $files = array_diff(scandir("images"), ['.', '..']); // ambil semua file gambar kecuali . dan ..
 }
 
-// Tambah data
+// =============================
+// Tambah data barang
+// =============================
 if (isset($_POST['tambah'])) {
     $id = $_POST['id'];
     $nama = $_POST['nama'];
@@ -21,24 +23,29 @@ if (isset($_POST['tambah'])) {
     $merk = $_POST['merk'];
     $kualitas = $_POST['kualitas'];
 
-    // Ambil nama gambar dari input (local)
+    // Ambil nama file gambar yang dipilih dari dropdown
     $gambar = "images/" . $_POST['gambar'];
 
+    // buat objek Barang baru
     $barang = new Barang($id, $nama, $harga, $merk, $kualitas, $gambar);
+    // simpan ke session
     $_SESSION['daftarBarang'][] = $barang;
 }
 
-// Update data
+// =============================
+// Update data barang
+// =============================
 if (isset($_POST['update'])) {
     $id = $_POST['id'];
     foreach ($_SESSION['daftarBarang'] as $b) {
-        if ($b->getId() == $id) {
+        if ($b->getId() == $id) { // cari barang berdasarkan ID
+            // update data
             $b->setNama($_POST['nama']);
             $b->setHarga($_POST['harga']);
             $b->setMerk($_POST['merk']);
             $b->setKualitas($_POST['kualitas']);
 
-            // Update gambar jika dipilih baru
+            // jika gambar dipilih baru, update juga gambarnya
             if ($_POST['gambar'] != "") {
                 $gambar = "images/" . $_POST['gambar'];
                 $b->setGambar($gambar);
@@ -47,24 +54,29 @@ if (isset($_POST['update'])) {
     }
 }
 
-// Hapus data
+// =============================
+// Hapus data barang
+// =============================
 if (isset($_GET['hapus'])) {
     $id = $_GET['hapus'];
     foreach ($_SESSION['daftarBarang'] as $key => $b) {
-        if ($b->getId() == $id) {
-            unset($_SESSION['daftarBarang'][$key]);
+        if ($b->getId() == $id) { // cari barang sesuai ID
+            unset($_SESSION['daftarBarang'][$key]); // hapus dari array
         }
     }
+    // reset index array biar rapih
     $_SESSION['daftarBarang'] = array_values($_SESSION['daftarBarang']);
 }
 
-// Cari data
+// =============================
+// Cari data barang
+// =============================
 $cariBarang = null;
 if (isset($_POST['cari'])) {
     $idCari = $_POST['idCari'];
     foreach ($_SESSION['daftarBarang'] as $b) {
-        if ($b->getId() == $idCari) {
-            $cariBarang = $b;
+        if ($b->getId() == $idCari) { // cocokkan ID dengan input
+            $cariBarang = $b; // simpan hasil pencarian
         }
     }
 }
@@ -85,7 +97,9 @@ if (isset($_POST['cari'])) {
 <body>
     <h1>Toko Elektronik</h1>
 
-    <!-- Form Tambah Barang -->
+    <!-- =============================
+         Form Tambah Barang
+    ============================== -->
     <div class="form-box">
         <h3>Tambah Barang</h3>
         <form method="post">
@@ -95,6 +109,7 @@ if (isset($_POST['cari'])) {
             Merk: <input type="text" name="merk" required><br><br>
             Kualitas: <input type="text" name="kualitas" required><br><br>
             Gambar: 
+            <!-- dropdown berisi daftar file gambar di folder images -->
             <select name="gambar" required>
                 <option value="">-- Pilih Gambar --</option>
                 <?php foreach ($files as $f): ?>
@@ -105,7 +120,9 @@ if (isset($_POST['cari'])) {
         </form>
     </div>
 
-    <!-- Form Cari Barang -->
+    <!-- =============================
+         Form Cari Barang
+    ============================== -->
     <div class="form-box">
         <h3>Cari Barang</h3>
         <form method="post">
@@ -113,6 +130,7 @@ if (isset($_POST['cari'])) {
             <button type="submit" name="cari">Cari</button>
         </form>
         <?php if ($cariBarang != null): ?>
+            <!-- tampilkan hasil pencarian -->
             <p><b>Data Ditemukan:</b></p>
             <p>ID: <?= $cariBarang->getId(); ?></p>
             <p>Nama: <?= $cariBarang->getNama(); ?></p>
@@ -123,7 +141,9 @@ if (isset($_POST['cari'])) {
         <?php endif; ?>
     </div>
 
-    <!-- Tabel Barang -->
+    <!-- =============================
+         Tabel Daftar Barang
+    ============================== -->
     <h3>Daftar Barang</h3>
     <table>
         <tr>
@@ -136,10 +156,12 @@ if (isset($_POST['cari'])) {
             <th>Aksi</th>
         </tr>
         <?php if (empty($_SESSION['daftarBarang'])): ?>
+            <!-- jika belum ada data -->
             <tr><td colspan="7">Belum ada data.</td></tr>
         <?php else: ?>
             <?php foreach ($_SESSION['daftarBarang'] as $b): ?>
                 <tr>
+                    <!-- tampilkan data barang -->
                     <td><?= $b->getId(); ?></td>
                     <td><?= $b->getNama(); ?></td>
                     <td><?= $b->getHarga(); ?></td>
@@ -155,6 +177,7 @@ if (isset($_POST['cari'])) {
                             Merk: <input type="text" name="merk" value="<?= $b->getMerk(); ?>" required><br>
                             Kualitas: <input type="text" name="kualitas" value="<?= $b->getKualitas(); ?>" required><br>
                             Gambar: 
+                            <!-- dropdown untuk pilih gambar baru -->
                             <select name="gambar">
                                 <option value="">-- (tidak diganti) --</option>
                                 <?php foreach ($files as $f): ?>
